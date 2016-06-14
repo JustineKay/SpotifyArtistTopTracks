@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+class SpotifyArtist
+{
+    let spotifyID = String()
+    let name = String()
+    let topTracks = [Track]()
+    
+    struct Track
+    {
+        let name: String
+    }
+}
