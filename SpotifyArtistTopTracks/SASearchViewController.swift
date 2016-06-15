@@ -40,7 +40,7 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    //MARK: - TableView delegate methods
+    //MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
@@ -55,7 +55,6 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(artistCellReuseIdentifier, forIndexPath: indexPath)
         
-        // Configure the cell...
         let spotifyArtist = results[indexPath.row]
         cell.textLabel?.text = spotifyArtist.name
         
@@ -69,7 +68,6 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         if let topTracksVC = destination as? SATopTracksTableViewController {
             topTracksVC.spotifyArtist = selectedArtist
         }
-        
     }
     
 }
