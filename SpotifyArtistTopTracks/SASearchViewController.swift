@@ -62,4 +62,14 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let indexPath = self.searchResultsTableView.indexPathForSelectedRow
+        let selectedArtist = results[indexPath!.row]
+        let destination = segue.destinationViewController as? UITableViewController
+        if let topTracksVC = destination as? SATopTracksTableViewController {
+            topTracksVC.spotifyArtist = selectedArtist
+        }
+        
+    }
+    
 }

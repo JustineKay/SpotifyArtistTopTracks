@@ -13,11 +13,29 @@ class SATopTracksTableViewController: UITableViewController {
     @IBOutlet weak var artistImageView: UIImageView!
     @IBOutlet weak var artistNameLabel: UILabel!
     
+    var spotifyArtist = SpotifyArtist()
+    var results = [SpotifyArtist.Track()]
+    let trackCellReuseIdentifier = "trackCellReuseIdentifier"
+        
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        
+        fetchArtistTopTracks()
+    }
+    
+    func fetchArtistTopTracks()
+    {
+        SARequestManager.sharedService.getArtistTopTracksWithCompletion(self.spotifyArtist) { (response) in
+            switch response {
+            case .Failure(error: let error):
+                print("Error fetching top tracks: \(error)")
+            case .Success(topTracks: let returnedTracks):
+                print("Success: \(returnedTracks)")
+                self.results = returnedTracks
+                self.tableView.reloadData()
+            }
+        }
     }
     
     // MARK: - Table view data source
@@ -29,19 +47,18 @@ class SATopTracksTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return results.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(trackCellReuseIdentifier, forIndexPath: indexPath)
 
         // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -37,7 +37,7 @@ class SARequestManager {
     
     func getArtistTopTracksWithCompletion(artist: SpotifyArtist, completion: ((TopTracksResponse) -> Void)) {
         let artistID = artist.spotifyID
-        let path = "https://api.spotify.com/v1/artists/\(artistID)/top-tracks"
+        let path = "https://api.spotify.com/v1/artists/\(artistID)/top-tracks?country=US"
         guard let url = NSURL(string: path) else {
             return
         }
@@ -58,7 +58,7 @@ class SARequestManager {
                     // 2. We were able to parse the data. We need to map the JSON into Track objects.
                     
                     //map to JSON
-                    print(jsonResult)
+                    print(jsonResult!["tracks"])
                     
                     //create Tracks
 //                    let returnedTracks = self.createTracks(artist, results: jsonResult!)
@@ -102,10 +102,6 @@ class SARequestManager {
                     let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary
                     
                     // 2. We were able to parse the data. We need to map the JSON into SpotifyArtist objects.
-                    
-                    //map to JSON
-                    print(jsonResult!["artists"]!["items"])
-                    
                     var returnedArtists =  [SpotifyArtist]()
                     
                     if let results = jsonResult?["artists"] as? NSDictionary {
