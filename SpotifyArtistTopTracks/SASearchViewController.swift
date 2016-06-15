@@ -8,21 +8,60 @@
 
 import UIKit
 
-class SASearchViewController: UIViewController
+class SASearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
 
     @IBOutlet weak var artistNameTextField: UITextField!
+    @IBOutlet weak var searchResultsTableView: UITableView!
+    
+    var results = [SpotifyArtist]()
+    let artistCellReuseIdentifier = "artistCellReuseIdentifier"
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-       
+        self.searchResultsTableView.delegate = self
+        self.searchResultsTableView.dataSource = self
+        
+        SARequestManager.sharedService.getArtistsWithCompletion(artistNameTextField.text!) { (response) in
+            switch response {
+            case .Failure(error: let error):
+                print("Error fetching artists: \(error)")
+            case .Success(artists: let returnedArtists):
+                print("Success: \(returnedArtists)")
+                self.results = returnedArtists
+                self.searchResultsTableView.reloadData()
+            }
+        }
     }
+    
+    //MARK: - Actions
     
     @IBAction func performSearch(sender: UIButton)
     {
         
+    }
+    
+    //MARK: - TableView delegate methods
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return results.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(artistCellReuseIdentifier, forIndexPath: indexPath)
+        
+        // Configure the cell...
+        let spotifyArtist = results[indexPath.row]
+        cell.textLabel?.text = spotifyArtist.name
+        
+        return cell
     }
     
 }

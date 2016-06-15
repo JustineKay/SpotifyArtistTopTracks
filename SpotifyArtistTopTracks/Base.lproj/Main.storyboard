@@ -88,31 +88,84 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="artist name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JfE-if-tjQ">
-                                <rect key="frame" x="20" y="99" width="560" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="artist name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JfE-if-tjQ">
+                                <rect key="frame" x="20" y="108" width="505" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzO-kh-SsH">
-                                <rect key="frame" x="277" y="169" width="47" height="30"/>
+                                <rect key="frame" x="533" y="108" width="47" height="30"/>
                                 <state key="normal" title="search"/>
                                 <connections>
                                     <action selector="performSearch:" destination="iXn-TV-Nbk" eventType="touchUpInside" id="PZu-yJ-VrM"/>
                                     <segue destination="Bgq-Pv-C3B" kind="show" id="e9m-uy-yR1"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="poq-Vb-BgY">
+                                <rect key="frame" x="0.0" y="150" width="600" height="450"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="artistCellReuseIdentifier" id="ZMS-Zr-je0">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZMS-Zr-je0" id="5q5-JK-gik">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdJ-yI-If4">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Spotify Artists' Top Tracks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5d-Dk-bck">
+                                        <rect key="frame" x="149" y="36" width="302" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="qpc-ii-ACl"/>
+                                    <constraint firstItem="v5d-Dk-bck" firstAttribute="centerY" secondItem="jdJ-yI-If4" secondAttribute="centerY" id="wz9-RZ-2CO"/>
+                                    <constraint firstItem="v5d-Dk-bck" firstAttribute="centerX" secondItem="jdJ-yI-If4" secondAttribute="centerX" id="zdA-Hj-CIc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hzO-kh-SsH" firstAttribute="top" secondItem="JfE-if-tjQ" secondAttribute="bottom" constant="40" id="BP2-cF-WIz"/>
+                            <constraint firstItem="hzO-kh-SsH" firstAttribute="centerY" secondItem="JfE-if-tjQ" secondAttribute="centerY" id="BGp-G1-06M"/>
+                            <constraint firstAttribute="trailing" secondItem="jdJ-yI-If4" secondAttribute="trailing" id="DyF-Iz-ljA"/>
+                            <constraint firstItem="hzO-kh-SsH" firstAttribute="top" secondItem="jdJ-yI-If4" secondAttribute="bottom" constant="8" id="E8R-PO-aLi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hzO-kh-SsH" secondAttribute="trailing" id="FVb-wl-NAa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JfE-if-tjQ" secondAttribute="trailing" id="Ood-au-Zlp"/>
+                            <constraint firstItem="hzO-kh-SsH" firstAttribute="leading" secondItem="JfE-if-tjQ" secondAttribute="trailing" constant="8" symbolic="YES" id="OrZ-9l-ltk"/>
                             <constraint firstAttribute="leadingMargin" secondItem="JfE-if-tjQ" secondAttribute="leading" id="UbT-2y-XtF"/>
-                            <constraint firstItem="hzO-kh-SsH" firstAttribute="centerX" secondItem="2YH-Fb-QKi" secondAttribute="centerX" id="bFt-zz-d1E"/>
-                            <constraint firstItem="JfE-if-tjQ" firstAttribute="top" secondItem="gn7-L6-6GF" secondAttribute="bottom" constant="79" id="thY-Th-SVB"/>
+                            <constraint firstItem="poq-Vb-BgY" firstAttribute="top" secondItem="JfE-if-tjQ" secondAttribute="bottom" constant="12" id="VIz-JC-XNN"/>
+                            <constraint firstItem="pHU-uX-fEi" firstAttribute="top" secondItem="poq-Vb-BgY" secondAttribute="bottom" id="W2g-ob-f6U"/>
+                            <constraint firstItem="JfE-if-tjQ" firstAttribute="top" secondItem="jdJ-yI-If4" secondAttribute="bottom" constant="8" symbolic="YES" id="cl1-Az-a63"/>
+                            <constraint firstItem="poq-Vb-BgY" firstAttribute="leading" secondItem="2YH-Fb-QKi" secondAttribute="leading" id="fi4-Ha-ENk"/>
+                            <constraint firstItem="jdJ-yI-If4" firstAttribute="leading" secondItem="2YH-Fb-QKi" secondAttribute="leading" id="gX7-hE-dsH"/>
+                            <constraint firstItem="jdJ-yI-If4" firstAttribute="top" secondItem="2YH-Fb-QKi" secondAttribute="top" id="iE9-r8-Bym"/>
+                            <constraint firstItem="hzO-kh-SsH" firstAttribute="centerY" secondItem="JfE-if-tjQ" secondAttribute="centerY" id="miP-Du-Q7w"/>
+                            <constraint firstItem="JfE-if-tjQ" firstAttribute="top" secondItem="gn7-L6-6GF" secondAttribute="bottom" constant="8" symbolic="YES" id="thY-Th-SVB"/>
+                            <constraint firstAttribute="trailing" secondItem="poq-Vb-BgY" secondAttribute="trailing" id="uyk-DF-Ukv"/>
+                            <constraint firstItem="hzO-kh-SsH" firstAttribute="top" secondItem="gn7-L6-6GF" secondAttribute="bottom" constant="8" id="zD9-eR-tT4"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Ood-au-Zlp"/>
+                                <exclude reference="thY-Th-SVB"/>
+                                <exclude reference="E8R-PO-aLi"/>
+                                <exclude reference="miP-Du-Q7w"/>
+                                <exclude reference="zD9-eR-tT4"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="artistNameTextField" destination="JfE-if-tjQ" id="kBD-oi-bp2"/>
+                        <outlet property="searchResultsTableView" destination="poq-Vb-BgY" id="u04-9y-kXF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VqQ-4I-rjD" userLabel="First Responder" sceneMemberID="firstResponder"/>
