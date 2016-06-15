@@ -10,12 +10,12 @@ import Foundation
 
 class SpotifyArtist
 {
-    let spotifyID = String()
-    let name = String()
-    let topTracks = [Track]()
+    var spotifyID = String()
+    var name = String()
+    var topTracks = [Track]()
     
-    struct Track
+    class Track
     {
-        let name: String
+        var name = String()
     }
 }
