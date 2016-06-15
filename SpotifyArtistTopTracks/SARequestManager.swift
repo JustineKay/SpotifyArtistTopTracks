@@ -104,12 +104,16 @@ class SARequestManager {
                     // 2. We were able to parse the data. We need to map the JSON into SpotifyArtist objects.
                     
                     //map to JSON
-                    print(jsonResult!["artist"])
+                    print(jsonResult!["artists"]!["items"])
                     
-                    //create artists
-//                    let returnedArtists = self.createArtists(jsonResult!)
-//                    
-//                    result = ArtistsResponse.Success(artists: returnedArtists)
+                    var returnedArtists =  [SpotifyArtist]()
+                    
+                    if let results = jsonResult?["artists"] as? NSDictionary {
+                        if let artistResults = results["items"] as? NSArray {
+                            returnedArtists = self.createArtists(artistResults as! [NSDictionary])
+                        }
+                    }
+                    result = ArtistsResponse.Success(artists: returnedArtists)
                     
                 } catch let error as NSError {
                     // 3. Got back something that wasn't valid JSON.
@@ -121,31 +125,34 @@ class SARequestManager {
             }
             
             // Call our completion handler on the main queue
-//            dispatch_async(dispatch_get_main_queue()) {
-//                completion(result)
-//            }
+            dispatch_async(dispatch_get_main_queue()) {
+                completion(result)
+            }
         }
         task.resume()
     }
     
-    func createArtists(results: NSDictionary) -> [SpotifyArtist]
+    func createArtists(results: [NSDictionary]) -> [SpotifyArtist]
     {
         var spotifyArtists = [SpotifyArtist]()
-        for _ in results {
+        for result in results {
+            let artistResult = result as? NSDictionary
             let artist = SpotifyArtist()
-            artist.name = results["name"] as! String
-            artist.spotifyID = results["id"] as! String
+            guard let artistName = artistResult?["name"] as? String! else {continue}
+            guard let artistSpotifyID = artistResult?["id"] as? String else {continue}
+            artist.name = artistName
+            artist.spotifyID = artistSpotifyID
             spotifyArtists.append(artist)
         }
         return spotifyArtists
     }
     
-    func createTracks(selectedArtist: SpotifyArtist, results: NSDictionary) -> [SpotifyArtist.Track]
+    func createTracks(selectedArtist: SpotifyArtist, results: [NSDictionary]) -> [SpotifyArtist.Track]
     {
         let artistTopTracks = [SpotifyArtist.Track()]
-        for _ in results {
+        for result in results {
             let track = SpotifyArtist.Track()
-            track.name = results["name"] as! String
+            track.name = result["name"] as! String
         }
         
         selectedArtist.topTracks = artistTopTracks
