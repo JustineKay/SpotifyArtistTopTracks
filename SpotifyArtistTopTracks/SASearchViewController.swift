@@ -22,7 +22,12 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         self.searchResultsTableView.delegate = self
         self.searchResultsTableView.dataSource = self
-        
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func performSearch(sender: UIButton)
+    {
         SARequestManager.sharedService.getArtistsWithCompletion(artistNameTextField.text!) { (response) in
             switch response {
             case .Failure(error: let error):
@@ -33,13 +38,6 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
                 self.searchResultsTableView.reloadData()
             }
         }
-    }
-    
-    //MARK: - Actions
-    
-    @IBAction func performSearch(sender: UIButton)
-    {
-        
     }
     
     //MARK: - TableView delegate methods

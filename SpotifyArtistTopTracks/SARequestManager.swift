@@ -104,7 +104,7 @@ class SARequestManager {
                     // 2. We were able to parse the data. We need to map the JSON into SpotifyArtist objects.
                     
                     //map to JSON
-                    print(jsonResult)
+                    print(jsonResult!["artist"])
                     
                     //create artists
 //                    let returnedArtists = self.createArtists(jsonResult!)
