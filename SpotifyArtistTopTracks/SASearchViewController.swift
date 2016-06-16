@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SASearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class SASearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
 {
 
     @IBOutlet weak var artistNameTextField: UITextField!
@@ -20,14 +20,24 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         self.searchResultsTableView.delegate = self
         self.searchResultsTableView.dataSource = self
+        self.artistNameTextField.delegate = self
+        
         searchResultsTableView.backgroundColor = UIColor.blackColor()
+        artistNameTextField.clearsOnBeginEditing = true
+        artistNameTextField.addTarget(self, action: #selector(SASearchViewController.textFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
+    }
+    
+    func textFieldDidChange()
+    {
+        performSearch(self)
     }
   
     //MARK: - Actions
     
-    @IBAction func performSearch(sender: UIButton)
+    @IBAction func performSearch(sender: AnyObject)
     {
         SARequestManager.sharedService.getArtistsWithCompletion(artistNameTextField.text!) { (response) in
             switch response {
@@ -75,4 +85,11 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    //MARK: - Text field delegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        performSearch(self)
+        self.view.endEditing(true)
+        return true
+    }
 }

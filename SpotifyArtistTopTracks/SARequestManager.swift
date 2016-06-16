@@ -57,9 +57,6 @@ class SARequestManager {
                     
                     // 2. We were able to parse the data. We need to map the JSON into Track objects.
                     
-                    //map to JSON
-                    print(jsonResult!["tracks"])
-                    
                     var returnedTracks = [SpotifyArtist.Track()]
                     
                     if let results = jsonResult?["tracks"] as? NSArray {
