@@ -20,8 +20,9 @@ class SATopTracksTableViewController: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
         fetchArtistTopTracks()
+        self.tableView.backgroundColor = UIColor.blackColor()
+        artistNameLabel.text = spotifyArtist.name
     }
     
     //MARK: - Network request
@@ -58,6 +59,9 @@ class SATopTracksTableViewController: UITableViewController {
         
         let track = results[indexPath.row]
         cell.textLabel?.text = track.name
+        cell.textLabel?.textColor = UIColor.init(colorLiteralRed: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1)
+        cell.textLabel?.font = UIFont.init(name: "Montserrat", size: 17.0)
+        cell.backgroundColor = UIColor.blackColor()
 
         return cell
     }

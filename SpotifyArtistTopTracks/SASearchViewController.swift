@@ -22,8 +22,9 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         self.searchResultsTableView.delegate = self
         self.searchResultsTableView.dataSource = self
+        searchResultsTableView.backgroundColor = UIColor.blackColor()
     }
-    
+  
     //MARK: - Actions
     
     @IBAction func performSearch(sender: UIButton)
@@ -57,6 +58,10 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         
         let spotifyArtist = results[indexPath.row]
         cell.textLabel?.text = spotifyArtist.name
+        cell.textLabel?.textColor = UIColor.init(colorLiteralRed: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1)
+        cell.textLabel?.font = UIFont.init(name: "Montserrat", size: 17.0)
+        cell.backgroundColor = UIColor.blackColor()
+        
         
         return cell
     }
