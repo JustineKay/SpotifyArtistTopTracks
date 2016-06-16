@@ -9,6 +9,7 @@
         <mutableArray key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
             <string>Montserrat-Bold</string>
+            <string>Montserrat-Bold</string>
         </mutableArray>
         <mutableArray key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
@@ -103,29 +104,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="artist name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JfE-if-tjQ">
-                                <rect key="frame" x="20" y="108" width="560" height="30"/>
+                                <rect key="frame" x="20" y="175" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdJ-yI-If4">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="175"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Spotify Artists' Top Tracks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5d-Dk-bck">
-                                        <rect key="frame" x="129" y="36" width="341" height="27"/>
-                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Artists' Top Tracks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5d-Dk-bck">
+                                        <rect key="frame" x="184" y="139" width="232.5" height="24.5"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotifyLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9UC-lX-UsO">
+                                        <rect key="frame" x="263" y="20" width="75" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="2hI-y5-yiU"/>
+                                            <constraint firstAttribute="height" constant="75" id="Jtb-gE-1eW"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spotify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaW-sS-KlD">
+                                        <rect key="frame" x="253" y="95" width="95.5" height="32"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="26"/>
                                         <color key="textColor" red="0.41568627450000001" green="0.89019607840000003" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="qpc-ii-ACl"/>
+                                    <constraint firstItem="9UC-lX-UsO" firstAttribute="centerX" secondItem="v5d-Dk-bck" secondAttribute="centerX" id="MPh-SR-68b"/>
+                                    <constraint firstItem="AaW-sS-KlD" firstAttribute="top" secondItem="9UC-lX-UsO" secondAttribute="bottom" id="ORx-Sk-5Tz"/>
+                                    <constraint firstItem="9UC-lX-UsO" firstAttribute="centerX" secondItem="jdJ-yI-If4" secondAttribute="centerX" id="OVI-zB-5rC"/>
+                                    <constraint firstItem="AaW-sS-KlD" firstAttribute="centerX" secondItem="jdJ-yI-If4" secondAttribute="centerX" id="grA-8f-1OC"/>
+                                    <constraint firstItem="v5d-Dk-bck" firstAttribute="top" secondItem="9UC-lX-UsO" secondAttribute="bottom" constant="-2" id="jsO-Xq-lRw"/>
+                                    <constraint firstItem="v5d-Dk-bck" firstAttribute="top" secondItem="AaW-sS-KlD" secondAttribute="bottom" constant="12" id="ki7-UH-9Er"/>
+                                    <constraint firstItem="9UC-lX-UsO" firstAttribute="top" secondItem="jdJ-yI-If4" secondAttribute="top" constant="20" symbolic="YES" id="lNZ-OE-lf8"/>
+                                    <constraint firstAttribute="height" constant="175" id="qpc-ii-ACl"/>
                                     <constraint firstItem="v5d-Dk-bck" firstAttribute="centerY" secondItem="jdJ-yI-If4" secondAttribute="centerY" id="wz9-RZ-2CO"/>
                                     <constraint firstItem="v5d-Dk-bck" firstAttribute="centerX" secondItem="jdJ-yI-If4" secondAttribute="centerX" id="zdA-Hj-CIc"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="jsO-Xq-lRw"/>
+                                        <exclude reference="wz9-RZ-2CO"/>
+                                        <exclude reference="MPh-SR-68b"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="poq-Vb-BgY">
-                                <rect key="frame" x="0.0" y="150" width="600" height="450"/>
+                                <rect key="frame" x="0.0" y="217" width="600" height="383"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="artistCellReuseIdentifier" textLabel="dFP-Zi-Ev9" style="IBUITableViewCellStyleDefault" id="ZMS-Zr-je0">
@@ -159,16 +187,18 @@
                             <constraint firstItem="poq-Vb-BgY" firstAttribute="top" secondItem="JfE-if-tjQ" secondAttribute="bottom" constant="12" id="VIz-JC-XNN"/>
                             <constraint firstItem="pHU-uX-fEi" firstAttribute="top" secondItem="poq-Vb-BgY" secondAttribute="bottom" id="W2g-ob-f6U"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JfE-if-tjQ" secondAttribute="trailing" id="btr-I0-3Ps"/>
-                            <constraint firstItem="JfE-if-tjQ" firstAttribute="top" secondItem="jdJ-yI-If4" secondAttribute="bottom" constant="8" symbolic="YES" id="cl1-Az-a63"/>
+                            <constraint firstItem="JfE-if-tjQ" firstAttribute="top" secondItem="jdJ-yI-If4" secondAttribute="bottom" id="cl1-Az-a63"/>
                             <constraint firstItem="poq-Vb-BgY" firstAttribute="leading" secondItem="2YH-Fb-QKi" secondAttribute="leading" id="fi4-Ha-ENk"/>
                             <constraint firstItem="jdJ-yI-If4" firstAttribute="leading" secondItem="2YH-Fb-QKi" secondAttribute="leading" id="gX7-hE-dsH"/>
                             <constraint firstItem="jdJ-yI-If4" firstAttribute="top" secondItem="2YH-Fb-QKi" secondAttribute="top" id="iE9-r8-Bym"/>
+                            <constraint firstItem="JfE-if-tjQ" firstAttribute="top" secondItem="v5d-Dk-bck" secondAttribute="bottom" constant="8" id="tIR-P2-BKE"/>
                             <constraint firstItem="JfE-if-tjQ" firstAttribute="top" secondItem="gn7-L6-6GF" secondAttribute="bottom" constant="8" symbolic="YES" id="thY-Th-SVB"/>
                             <constraint firstAttribute="trailing" secondItem="poq-Vb-BgY" secondAttribute="trailing" id="uyk-DF-Ukv"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Ood-au-Zlp"/>
+                                <exclude reference="tIR-P2-BKE"/>
                                 <exclude reference="thY-Th-SVB"/>
                             </mask>
                         </variation>
@@ -183,4 +213,7 @@
             <point key="canvasLocation" x="-246" y="510"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="spotifyLogo" width="782" height="784"/>
+    </resources>
 </document>
