@@ -20,12 +20,13 @@ class SATopTracksTableViewController: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        fetchArtistTopTracks()
-        self.tableView.backgroundColor = UIColor.blackColor()
+        
         artistNameLabel.text = spotifyArtist.name
         
+        fetchArtistTopTracks()
+        
         setUpCustomTableViewCell()
-        autoAdjustTableViewRowHeight()
+        setUpTableView()
     }
     
     //MARK: - UI
@@ -36,10 +37,11 @@ class SATopTracksTableViewController: UITableViewController {
         self.tableView.registerNib(nib, forCellReuseIdentifier: trackCellReuseIdentifier)
     }
     
-    func autoAdjustTableViewRowHeight()
+    func setUpTableView()
     {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
+        self.tableView.backgroundColor = UIColor.blackColor()
     }
     
     //MARK: - Network request
@@ -76,9 +78,6 @@ class SATopTracksTableViewController: UITableViewController {
         
         let track = results[indexPath.row]
         cell!.trackNameLabel.text = track.name
-//        cell.textLabel?.textColor = UIColor.init(colorLiteralRed: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1)
-//        cell.textLabel?.font = UIFont.init(name: "Montserrat", size: 17.0)
-//        cell.backgroundColor = UIColor.blackColor()
 
         return cell!
     }
