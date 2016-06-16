@@ -42,7 +42,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxz-5r-upS">
-                                    <rect key="frame" x="500" y="8" width="92" height="31"/>
+                                    <rect key="frame" x="20" y="20" width="92" height="31"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
                                     <color key="tintColor" red="0.41568627450980389" green="0.8901960784313725" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="New Search"/>
@@ -55,9 +55,9 @@
                             <constraints>
                                 <constraint firstItem="waO-hR-xhC" firstAttribute="top" secondItem="fK1-Mb-7jg" secondAttribute="bottom" constant="8" symbolic="YES" id="4Pw-Zb-NZ3"/>
                                 <constraint firstItem="waO-hR-xhC" firstAttribute="centerX" secondItem="qDG-eB-SBY" secondAttribute="centerX" id="Dl5-bi-blr"/>
-                                <constraint firstItem="yxz-5r-upS" firstAttribute="trailing" secondItem="qDG-eB-SBY" secondAttribute="trailingMargin" id="Xpg-zg-DY5"/>
-                                <constraint firstItem="yxz-5r-upS" firstAttribute="top" secondItem="qDG-eB-SBY" secondAttribute="topMargin" id="gwh-KU-cvr"/>
+                                <constraint firstItem="yxz-5r-upS" firstAttribute="leading" secondItem="qDG-eB-SBY" secondAttribute="leading" constant="20" symbolic="YES" id="UuG-Ir-Ify"/>
                                 <constraint firstItem="fK1-Mb-7jg" firstAttribute="centerY" secondItem="qDG-eB-SBY" secondAttribute="centerY" id="ilm-qr-6A5"/>
+                                <constraint firstItem="yxz-5r-upS" firstAttribute="top" secondItem="qDG-eB-SBY" secondAttribute="top" constant="20" symbolic="YES" id="rBy-lv-3qH"/>
                                 <constraint firstItem="fK1-Mb-7jg" firstAttribute="top" secondItem="qDG-eB-SBY" secondAttribute="top" constant="50" id="rjR-Cn-115"/>
                                 <constraint firstItem="fK1-Mb-7jg" firstAttribute="centerX" secondItem="qDG-eB-SBY" secondAttribute="centerX" id="rr6-Xu-BTS"/>
                             </constraints>

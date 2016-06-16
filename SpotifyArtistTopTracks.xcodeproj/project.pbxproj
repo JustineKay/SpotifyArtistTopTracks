@@ -240,6 +240,7 @@
 				TargetAttributes = {
 					826F619D1D10939600569623 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 24Q7YD9VLQ;
 					};
 					826F61B11D10939600569623 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -453,10 +454,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SpotifyArtistTopTracks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.intrepid.SpotifyArtistTopTracks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -464,10 +468,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SpotifyArtistTopTracks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.intrepid.SpotifyArtistTopTracks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -536,6 +543,7 @@
 				826F61C81D10939600569623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		826F61C91D10939600569623 /* Build configuration list for PBXNativeTarget "SpotifyArtistTopTracksTests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +552,7 @@
 				826F61CB1D10939600569623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		826F61CC1D10939600569623 /* Build configuration list for PBXNativeTarget "SpotifyArtistTopTracksUITests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +561,7 @@
 				826F61CE1D10939600569623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
