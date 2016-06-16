@@ -60,7 +60,7 @@ class SARequestManager {
                     var returnedTracks = [Track]()
                     
                     if let results = jsonResult?["tracks"] as? NSArray {
-                        returnedTracks = self.createTracks(artist, results: results as! [NSDictionary])
+                        //returnedTracks = self.createTracks(artist, results: results as! [NSDictionary])
                     }
                     
                     result = TopTracksResponse.Success(topTracks: returnedTracks)
@@ -106,7 +106,7 @@ class SARequestManager {
                     
                     if let results = jsonResult?["artists"] as? NSDictionary {
                         if let artistResults = results["items"] as? NSArray {
-                            returnedArtists = self.createArtists(artistResults as! [NSDictionary])
+                            //returnedArtists = self.createArtists(artistResults as! [NSDictionary])
                         }
                     }
                     result = ArtistsResponse.Success(artists: returnedArtists)
@@ -128,34 +128,38 @@ class SARequestManager {
         task.resume()
     }
     
-    func createArtists(results: [NSDictionary]) -> [SpotifyArtist]
-    {
-        var spotifyArtists = [SpotifyArtist]()
-        for result in results {
-            let artistResult = result as? NSDictionary
-            guard let artistName = artistResult?["name"] as? String! else {continue}
-            guard let artistSpotifyID = artistResult?["id"] as? String else {continue}
-            let artist = SpotifyArtist()
-            artist.name = artistName
-            artist.spotifyID = artistSpotifyID
-            spotifyArtists.append(artist)
-        }
-        return spotifyArtists
+    func getDataWithArtist(){
+        
     }
     
-    func createTracks(selectedArtist: SpotifyArtist, results: [NSDictionary]) -> [Track]
-    {
-        var artistTopTracks = [Track]()
-        for result in results {
-            let trackResult = result as? NSDictionary
-            guard let trackName = trackResult?["name"] as? String else {continue}
-            let track = Track(name: trackName)
-            artistTopTracks.append(track)
-        }
-        
-        selectedArtist.topTracks = artistTopTracks
-        
-        return artistTopTracks
-    }
+//    func createArtists(results: [NSDictionary]) -> [SpotifyArtist]
+//    {
+//        var spotifyArtists = [SpotifyArtist]()
+//        for result in results {
+//            let artistResult = result as? NSDictionary
+//            guard let artistName = artistResult?["name"] as? String! else {continue}
+//            guard let artistSpotifyID = artistResult?["id"] as? String else {continue}
+//            let artist = SpotifyArtist()
+//            artist.name = artistName
+//            artist.spotifyID = artistSpotifyID
+//            spotifyArtists.append(artist)
+//        }
+//        return spotifyArtists
+//    }
+//    
+//    func createTracks(selectedArtist: SpotifyArtist, results: [NSDictionary]) -> [Track]
+//    {
+//        var artistTopTracks = [Track]()
+//        for result in results {
+//            let trackResult = result as? NSDictionary
+//            guard let trackName = trackResult?["name"] as? String else {continue}
+//            let track = Track(name: trackName)
+//            artistTopTracks.append(track)
+//        }
+//        
+//        selectedArtist.topTracks = artistTopTracks
+//        
+//        return artistTopTracks
+//    }
     
 }

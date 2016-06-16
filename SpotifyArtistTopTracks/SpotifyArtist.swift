@@ -8,17 +8,42 @@
 
 import Foundation
 
-class SpotifyArtist
+struct SpotifyArtist: Mappable
 {
-    var spotifyID = String()
-    var name = String()
-    var topTracks = [Track]()
+    let spotifyID: String
+    let name: String
+    let topTracks: Array<Track>?
+    
+    init(spotifyID: String, name: String, topTracks: [Track]? = nil)
+    {
+        self.spotifyID = spotifyID
+        self.name = name
+        self.topTracks = topTracks
+    }
+    
+    static func map(json: NSDictionary) -> [Mappable] {
+        let jsonID = json["id"] as? String
+        let jsonName = json["name"] as? String
+        return [SpotifyArtist(spotifyID: jsonID!, name: jsonName!)]
+    }
 }
 
-struct Track
+struct Track: Mappable
 {
-    let name: String
-    init (name: String) {
+    let name: String?
+    init (name: String?) {
         self.name = name
     }
+    
+    static func map(json: NSDictionary) -> [Mappable] {
+        let jsonName = json["name"] as? String
+        return [Track(name: jsonName)]
+
+    }
+}
+
+protocol Mappable
+{
+    static func map(json: NSDictionary) -> [Mappable]
+    
 }

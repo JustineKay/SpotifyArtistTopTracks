@@ -29,24 +29,12 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         artistNameTextField.addTarget(self, action: #selector(SASearchViewController.textFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
         
         searchResultsTableView.backgroundColor = UIColor.blackColor()
-        
-        //TODO: - test placeholder text
-        //setPlaceholderText()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool)
+    {
         super.viewWillAppear(animated)
         artistNameTextField.text = nil
-    }
-    
-    func setPlaceholderText()
-    {
-        let attributes = [
-            NSForegroundColorAttributeName: UIColor.init(colorLiteralRed: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1),
-            NSFontAttributeName : UIFont(name: "Montserrat", size: 17)!
-        ]
-        let placeholder = NSAttributedString(string: "enter artist name", attributes: attributes)
-        artistNameTextField.placeholder = String(placeholder)
     }
     
     //MARK: - Actions
@@ -92,7 +80,8 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
         let indexPath = self.searchResultsTableView.indexPathForSelectedRow
         let selectedArtist = results[indexPath!.row]
         let destination = segue.destinationViewController as? UITableViewController
@@ -103,7 +92,8 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - Text field delegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
         performSearch(self)
         self.view.endEditing(true)
         return true
