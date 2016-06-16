@@ -25,19 +25,33 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         self.searchResultsTableView.dataSource = self
         self.artistNameTextField.delegate = self
         
-        searchResultsTableView.backgroundColor = UIColor.blackColor()
         artistNameTextField.clearsOnBeginEditing = true
         artistNameTextField.addTarget(self, action: #selector(SASearchViewController.textFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
+        
+        searchResultsTableView.backgroundColor = UIColor.blackColor()
+        
+        //TODO: - test placeholder text
+        //setPlaceholderText()
     }
     
-    func textFieldDidChange()
-    {
-        performSearch(self)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        artistNameTextField.text = nil
     }
-  
+    
+    func setPlaceholderText()
+    {
+        let attributes = [
+            NSForegroundColorAttributeName: UIColor.init(colorLiteralRed: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1),
+            NSFontAttributeName : UIFont(name: "Montserrat", size: 17)!
+        ]
+        let placeholder = NSAttributedString(string: "enter artist name", attributes: attributes)
+        artistNameTextField.placeholder = String(placeholder)
+    }
+    
     //MARK: - Actions
     
-    @IBAction func performSearch(sender: AnyObject)
+    private func performSearch(sender: AnyObject)
     {
         SARequestManager.sharedService.getArtistsWithCompletion(artistNameTextField.text!) { (response) in
             switch response {
@@ -76,6 +90,8 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    //MARK: - Navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let indexPath = self.searchResultsTableView.indexPathForSelectedRow
         let selectedArtist = results[indexPath!.row]
@@ -92,4 +108,10 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.endEditing(true)
         return true
     }
+    
+    func textFieldDidChange()
+    {
+        performSearch(self)
+    }
+    
 }

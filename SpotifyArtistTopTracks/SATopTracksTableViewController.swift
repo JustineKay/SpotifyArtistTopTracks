@@ -53,8 +53,8 @@ class SATopTracksTableViewController: UITableViewController {
         return results.count
     }
 
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier(trackCellReuseIdentifier, forIndexPath: indexPath)
         
         let track = results[indexPath.row]
@@ -64,6 +64,11 @@ class SATopTracksTableViewController: UITableViewController {
         cell.backgroundColor = UIColor.blackColor()
 
         return cell
+    }
+    
+    @IBAction func popVC(sender: UIButton)
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
