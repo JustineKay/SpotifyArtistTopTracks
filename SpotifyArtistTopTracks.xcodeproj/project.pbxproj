@@ -19,6 +19,8 @@
 		826F61D91D1096CD00569623 /* SASearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F61D81D1096CD00569623 /* SASearchViewController.swift */; };
 		826F61DD1D12352100569623 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 826F61DB1D1234EF00569623 /* Montserrat-Bold.ttf */; };
 		826F61DE1D12352A00569623 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 826F61DC1D1234EF00569623 /* Montserrat-Regular.ttf */; };
+		826F61E01D12EEC800569623 /* TrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826F61DF1D12EEC800569623 /* TrackTableViewCell.xib */; };
+		826F61E21D12EEEF00569623 /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F61E11D12EEEF00569623 /* TrackTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		826F61D81D1096CD00569623 /* SASearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SASearchViewController.swift; sourceTree = "<group>"; };
 		826F61DB1D1234EF00569623 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		826F61DC1D1234EF00569623 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		826F61DF1D12EEC800569623 /* TrackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrackTableViewCell.xib; sourceTree = "<group>"; };
+		826F61E11D12EEEF00569623 /* TrackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				826F61A11D10939600569623 /* AppDelegate.swift */,
 				826F61D81D1096CD00569623 /* SASearchViewController.swift */,
 				826F61CF1D10945B00569623 /* SATopTracksTableViewController.swift */,
+				826F61E11D12EEEF00569623 /* TrackTableViewCell.swift */,
+				826F61DF1D12EEC800569623 /* TrackTableViewCell.xib */,
 				826F61A51D10939600569623 /* Main.storyboard */,
 				826F61AA1D10939600569623 /* LaunchScreen.storyboard */,
 				826F61D71D10966C00569623 /* Resources */,
@@ -280,6 +286,7 @@
 				826F61DD1D12352100569623 /* Montserrat-Bold.ttf in Resources */,
 				826F61AC1D10939600569623 /* LaunchScreen.storyboard in Resources */,
 				826F61A91D10939600569623 /* Assets.xcassets in Resources */,
+				826F61E01D12EEC800569623 /* TrackTableViewCell.xib in Resources */,
 				826F61DE1D12352A00569623 /* Montserrat-Regular.ttf in Resources */,
 				826F61A71D10939600569623 /* Main.storyboard in Resources */,
 			);
@@ -307,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				826F61D91D1096CD00569623 /* SASearchViewController.swift in Sources */,
+				826F61E21D12EEEF00569623 /* TrackTableViewCell.swift in Sources */,
 				826F61D21D10947000569623 /* SpotifyArtist.swift in Sources */,
 				826F61D41D10963D00569623 /* SARequestManager.swift in Sources */,
 				826F61A21D10939600569623 /* AppDelegate.swift in Sources */,
