@@ -13,7 +13,7 @@ enum RequestManager: ErrorType {
 }
 
 enum TopTracksResponse {
-    case Success(topTracks: [SpotifyArtist.Track])
+    case Success(topTracks: [Track])
     case Failure(error: ErrorType)
 }
 
@@ -57,7 +57,7 @@ class SARequestManager {
                     
                     // 2. We were able to parse the data. We need to map the JSON into Track objects.
                     
-                    var returnedTracks = [SpotifyArtist.Track()]
+                    var returnedTracks = [Track]()
                     
                     if let results = jsonResult?["tracks"] as? NSArray {
                         returnedTracks = self.createTracks(artist, results: results as! [NSDictionary])
@@ -71,7 +71,7 @@ class SARequestManager {
                 }
             } else {
                 // 4. Successful response, but no data returned... we'll treat this as an empty list.
-                result = TopTracksResponse.Success(topTracks: [SpotifyArtist.Track()])
+                result = TopTracksResponse.Success(topTracks: [Track]())
             }
             
             // Call our completion handler on the main queue
@@ -143,14 +143,13 @@ class SARequestManager {
         return spotifyArtists
     }
     
-    func createTracks(selectedArtist: SpotifyArtist, results: [NSDictionary]) -> [SpotifyArtist.Track]
+    func createTracks(selectedArtist: SpotifyArtist, results: [NSDictionary]) -> [Track]
     {
-        var artistTopTracks = [SpotifyArtist.Track()]
+        var artistTopTracks = [Track]()
         for result in results {
             let trackResult = result as? NSDictionary
             guard let trackName = trackResult?["name"] as? String else {continue}
-            let track = SpotifyArtist.Track()
-            track.name = trackName
+            let track = Track(name: trackName)
             artistTopTracks.append(track)
         }
         

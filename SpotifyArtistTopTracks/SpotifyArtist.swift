@@ -13,9 +13,12 @@ class SpotifyArtist
     var spotifyID = String()
     var name = String()
     var topTracks = [Track]()
-    
-    class Track
-    {
-        var name = String()
+}
+
+struct Track
+{
+    let name: String
+    init (name: String) {
+        self.name = name
     }
 }
