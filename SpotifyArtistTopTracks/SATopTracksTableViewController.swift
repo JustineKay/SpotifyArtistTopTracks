@@ -33,6 +33,8 @@ class SATopTracksTableViewController: UITableViewController {
     func setUpSelectedArtistUI()
     {
         artistNameLabel.text = spotifyArtist.name
+        artistImageView.layer.cornerRadius = 75.0
+        
         if let image = spotifyArtist.profileImage {
             let spotifyArtistImageURL = NSURL(string: image)
             artistImageView.sd_setImageWithURL(spotifyArtistImageURL)
