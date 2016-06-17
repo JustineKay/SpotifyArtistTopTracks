@@ -24,14 +24,14 @@ class SATopTracksTableViewController: UITableViewController {
         super.viewDidLoad()
         
         fetchArtistTopTracks()
-        setUpSelectedArtistUI()
+        setUpSelectedArtistProfileUI()
         setUpCustomTableViewCell()
         setUpTableView()
     }
     
     //MARK: - UI
     
-    func setUpSelectedArtistUI()
+    func setUpSelectedArtistProfileUI()
     {
         artistNameLabel.text = spotifyArtist.name
         artistImageView.layer.cornerRadius = 75.0
@@ -41,6 +41,12 @@ class SATopTracksTableViewController: UITableViewController {
             artistImageView.sd_setImageWithURL(spotifyArtistImageURL)
             backgroundImageView.sd_setImageWithURL(spotifyArtistImageURL)
         }
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = backgroundImageView.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        backgroundImageView.addSubview(blurEffectView)
     }
     
     func setUpCustomTableViewCell()

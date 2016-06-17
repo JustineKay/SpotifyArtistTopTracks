@@ -31,7 +31,7 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZV3-tK-8Vb">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
                                 </imageView>
-                                <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6BL-5S-Tse" userLabel="Opaque View">
+                                <view hidden="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6BL-5S-Tse" userLabel="Opaque View">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
