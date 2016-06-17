@@ -12,12 +12,14 @@ struct SpotifyArtist: Mappable {
     let spotifyID: String?
     let name: String?
     let topTracks: Array<Track>?
+    let profileImage: String?
     
-    init(spotifyID: String? = nil, name: String? = nil, topTracks: [Track]? = nil)
+    init(spotifyID: String? = nil, name: String? = nil, topTracks: [Track]? = nil, profileImage: String? = nil)
     {
         self.spotifyID = spotifyID
         self.name = name
         self.topTracks = topTracks
+        self.profileImage = profileImage
     }
     
     func map(json: NSDictionary) -> [Mappable]
@@ -39,12 +41,15 @@ struct SpotifyArtist: Mappable {
             let artistResult = result as? NSDictionary
             guard let artistName = artistResult?["name"] as? String! else {continue}
             guard let artistSpotifyID = artistResult?["id"] as? String else {continue}
-            let artist = SpotifyArtist(spotifyID: artistSpotifyID, name: artistName)
+            guard let artistImages = artistResult?["images"] as? [NSDictionary] else {continue}
+            guard let artistProfileImage = artistImages.first else {continue}
+            guard let artistProfileImageURLString = artistProfileImage["url"] as? String? else {continue}
+            let artist = SpotifyArtist(spotifyID: artistSpotifyID, name: artistName, profileImage: artistProfileImageURLString)
             spotifyArtists.append(artist)
         }
+        
         return spotifyArtists
     }
-
 }
 
 struct Track: Mappable
