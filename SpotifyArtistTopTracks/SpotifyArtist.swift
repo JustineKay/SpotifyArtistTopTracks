@@ -8,24 +8,45 @@
 
 import Foundation
 
-struct SpotifyArtist: Mappable
-{
-    let spotifyID: String
-    let name: String
+struct SpotifyArtist: Mappable {
+    let spotifyID: String?
+    let name: String?
     let topTracks: Array<Track>?
     
-    init(spotifyID: String, name: String, topTracks: [Track]? = nil)
+    init(spotifyID: String? = nil, name: String? = nil, topTracks: [Track]? = nil)
     {
         self.spotifyID = spotifyID
         self.name = name
         self.topTracks = topTracks
     }
     
-    static func map(json: NSDictionary) -> [Mappable] {
-        let jsonID = json["id"] as? String
-        let jsonName = json["name"] as? String
-        return [SpotifyArtist(spotifyID: jsonID!, name: jsonName!)]
+    func map(json: NSDictionary) -> [Mappable]
+    {
+        var spotifyArtists = [Mappable]()
+        
+        if let results = json["artists"] as? NSDictionary {
+            if let artistResults = results["items"] as? NSArray {
+                spotifyArtists = createArtists(artistResults as! [NSDictionary])
+            }
+        }
+        
+        return spotifyArtists
     }
+    
+    func createArtists(artistResults: [NSDictionary]) -> [Mappable]
+    {
+        var spotifyArtists = [Mappable]()
+        for result in artistResults {
+            let artistResult = result as? NSDictionary
+            guard let artistName = artistResult?["name"] as? String! else {continue}
+            guard let artistSpotifyID = artistResult?["id"] as? String else {continue}
+            let artist = SpotifyArtist(spotifyID: artistSpotifyID, name: artistName)
+            spotifyArtists.append(artist)
+        }
+        
+        return spotifyArtists
+    }
+
 }
 
 struct Track: Mappable
@@ -35,15 +56,31 @@ struct Track: Mappable
         self.name = name
     }
     
-    static func map(json: NSDictionary) -> [Mappable] {
+    func map(json: NSDictionary) -> [Mappable]
+    {
+        
+        
         let jsonName = json["name"] as? String
         return [Track(name: jsonName)]
-
     }
+    
+    func createTracks(results: [NSDictionary]) -> [Track]
+    {
+        var tracks = [Track]()
+        for result in results {
+            let trackResult = result as? NSDictionary
+            guard let trackName = trackResult?["name"] as? String else {continue}
+            let track = Track(name: trackName)
+            tracks.append(track)
+        }
+        
+        return tracks
+    }
+
 }
 
 protocol Mappable
 {
-    static func map(json: NSDictionary) -> [Mappable]
+    func map(json: NSDictionary) -> [Mappable]
     
 }

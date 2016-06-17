@@ -14,7 +14,7 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var artistNameTextField: UITextField!
     @IBOutlet weak var searchResultsTableView: UITableView!
     
-    var results = [SpotifyArtist]()
+    var results = [Mappable]()
     let artistCellReuseIdentifier = "artistCellReuseIdentifier"
     
     override func viewDidLoad()
@@ -39,14 +39,18 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - Actions
     
-    private func performSearch(sender: AnyObject)
+    private func performSearch()
     {
-        SARequestManager.sharedService.getArtistsWithCompletion(artistNameTextField.text!) { (response) in
+        let artist = SARequestManager.sharedService.getArtist(artistNameTextField.text!)
+        let url = SARequestManager.sharedService.artistsURL(artist.name!)
+        
+        
+        SARequestManager.sharedService.getDataWithCompletion(url, mappable: artist) { (response) in
             switch response {
             case .Failure(error: let error):
                 print("Error fetching artists: \(error)")
             case .Success(artists: let returnedArtists):
-                print("Success: \(returnedArtists)")
+                //print("Success: \(returnedArtists)")
                 self.results = returnedArtists
                 self.searchResultsTableView.reloadData()
             }
@@ -68,8 +72,8 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(artistCellReuseIdentifier, forIndexPath: indexPath)
         
-        let spotifyArtist = results[indexPath.row]
-        cell.textLabel?.text = spotifyArtist.name
+        let spotifyArtist = results[indexPath.row] as? SpotifyArtist
+        cell.textLabel?.text = spotifyArtist!.name
         cell.textLabel?.textColor = UIColor.init(colorLiteralRed: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1)
         cell.textLabel?.font = UIFont.init(name: "Montserrat", size: 17.0)
         cell.backgroundColor = UIColor.blackColor()
@@ -83,10 +87,10 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         let indexPath = self.searchResultsTableView.indexPathForSelectedRow
-        let selectedArtist = results[indexPath!.row]
+        let selectedArtist = results[indexPath!.row] as? SpotifyArtist
         let destination = segue.destinationViewController as? UITableViewController
         if let topTracksVC = destination as? SATopTracksTableViewController {
-            topTracksVC.spotifyArtist = selectedArtist
+            topTracksVC.spotifyArtist = selectedArtist!
         }
     }
     
@@ -94,14 +98,14 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
-        performSearch(self)
+        performSearch()
         self.view.endEditing(true)
         return true
     }
     
     func textFieldDidChange()
     {
-        performSearch(self)
+        performSearch()
     }
     
 }

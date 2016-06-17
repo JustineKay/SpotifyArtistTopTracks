@@ -18,7 +18,7 @@ enum TopTracksResponse {
 }
 
 enum ArtistsResponse {
-    case Success(artists: [SpotifyArtist])
+    case Success(artists: [Mappable])
     case Failure(error: ErrorType)
 }
 
@@ -48,14 +48,10 @@ class SARequestManager {
             // We have to handle a few cases here:
             
             if let error = error {
-                // 1. Something went wrong with the request. We pass along the error.
                 result = TopTracksResponse.Failure(error: error)
             } else if let data = data {
-                // We got back some data. We'll attempt to parse it as JSON.
                 do {
                     let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary
-                    
-                    // 2. We were able to parse the data. We need to map the JSON into Track objects.
                     
                     var returnedTracks = [Track]()
                     
@@ -66,15 +62,12 @@ class SARequestManager {
                     result = TopTracksResponse.Success(topTracks: returnedTracks)
                     
                 } catch let error as NSError {
-                    // 3. Got back something that wasn't valid JSON.
                     result = TopTracksResponse.Failure(error: error)
                 }
             } else {
-                // 4. Successful response, but no data returned... we'll treat this as an empty list.
                 result = TopTracksResponse.Success(topTracks: [Track]())
             }
             
-            // Call our completion handler on the main queue
             dispatch_async(dispatch_get_main_queue()) {
                 completion(result)
             }
@@ -82,45 +75,40 @@ class SARequestManager {
         task.resume()
     }
     
-    func getArtistsWithCompletion(artistName: String, completion: ((ArtistsResponse) -> Void)) {
+    func getArtist(artistName: String) -> SpotifyArtist {
+        let artist = SpotifyArtist(name: artistName)
+        return artist
+    }
+    
+    func artistsURL(artistName: String) -> NSURL
+    {
         let path = "https://api.spotify.com/v1/search?query=\(artistName)&offset=0&limit=20&type=artist&market=US"
-        guard let url = NSURL(string: path) else {
-            return
-        }
+        let url = NSURL(string: path)!
         
+        return url
+    }
+    
+    func getDataWithCompletion(url: NSURL, mappable: Mappable, completion: ((ArtistsResponse) -> Void))
+    {
         let task = session.dataTaskWithURL(url) { (data: NSData?, response: NSURLResponse?, error: NSError?) in
-            var result: ArtistsResponse
+        var result: ArtistsResponse
             
-            // We have to handle a few cases here:
-            
-            if let error = error {
-                // 1. Something went wrong with the request. We pass along the error.
+        if let error = error {
+            result = ArtistsResponse.Failure(error: error)
+        } else if let data = data {
+            do {
+                let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary
+                
+                var returnedArtists = [Mappable]()
+                returnedArtists = mappable.map(jsonResult!)
+                result = ArtistsResponse.Success(artists: returnedArtists)
+                
+            } catch let error as NSError {
                 result = ArtistsResponse.Failure(error: error)
-            } else if let data = data {
-                // We got back some data. We'll attempt to parse it as JSON.
-                do {
-                    let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary
-                    
-                    // 2. We were able to parse the data. We need to map the JSON into SpotifyArtist objects.
-                    var returnedArtists =  [SpotifyArtist]()
-                    
-                    if let results = jsonResult?["artists"] as? NSDictionary {
-                        if let artistResults = results["items"] as? NSArray {
-                            //returnedArtists = self.createArtists(artistResults as! [NSDictionary])
-                        }
-                    }
-                    result = ArtistsResponse.Success(artists: returnedArtists)
-                    
-                } catch let error as NSError {
-                    // 3. Got back something that wasn't valid JSON.
-                    result = ArtistsResponse.Failure(error: error)
-                }
-            } else {
-                // 4. Successful response, but no data returned... we'll treat this as an empty list.
-                result = ArtistsResponse.Success(artists: [SpotifyArtist]())
             }
-            
-            // Call our completion handler on the main queue
+        } else {
+            result = ArtistsResponse.Success(artists: [Mappable]())
+        }
             dispatch_async(dispatch_get_main_queue()) {
                 completion(result)
             }
@@ -128,38 +116,6 @@ class SARequestManager {
         task.resume()
     }
     
-    func getDataWithArtist(){
-        
-    }
     
-//    func createArtists(results: [NSDictionary]) -> [SpotifyArtist]
-//    {
-//        var spotifyArtists = [SpotifyArtist]()
-//        for result in results {
-//            let artistResult = result as? NSDictionary
-//            guard let artistName = artistResult?["name"] as? String! else {continue}
-//            guard let artistSpotifyID = artistResult?["id"] as? String else {continue}
-//            let artist = SpotifyArtist()
-//            artist.name = artistName
-//            artist.spotifyID = artistSpotifyID
-//            spotifyArtists.append(artist)
-//        }
-//        return spotifyArtists
-//    }
-//    
-//    func createTracks(selectedArtist: SpotifyArtist, results: [NSDictionary]) -> [Track]
-//    {
-//        var artistTopTracks = [Track]()
-//        for result in results {
-//            let trackResult = result as? NSDictionary
-//            guard let trackName = trackResult?["name"] as? String else {continue}
-//            let track = Track(name: trackName)
-//            artistTopTracks.append(track)
-//        }
-//        
-//        selectedArtist.topTracks = artistTopTracks
-//        
-//        return artistTopTracks
-//    }
     
 }
