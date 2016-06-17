@@ -11,6 +11,7 @@ import SDWebImage
 
 class SATopTracksTableViewController: UITableViewController {
 
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var artistImageView: UIImageView!
     @IBOutlet weak var artistNameLabel: UILabel!
     
@@ -38,6 +39,7 @@ class SATopTracksTableViewController: UITableViewController {
         if let image = spotifyArtist.profileImage {
             let spotifyArtistImageURL = NSURL(string: image)
             artistImageView.sd_setImageWithURL(spotifyArtistImageURL)
+            backgroundImageView.sd_setImageWithURL(spotifyArtistImageURL)
         }
     }
     
