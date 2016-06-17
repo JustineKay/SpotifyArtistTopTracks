@@ -29,7 +29,6 @@ struct SpotifyArtist: Mappable {
                 spotifyArtists = createArtists(artistResults as! [NSDictionary])
             }
         }
-        
         return spotifyArtists
     }
     
@@ -43,7 +42,6 @@ struct SpotifyArtist: Mappable {
             let artist = SpotifyArtist(spotifyID: artistSpotifyID, name: artistName)
             spotifyArtists.append(artist)
         }
-        
         return spotifyArtists
     }
 
@@ -52,28 +50,28 @@ struct SpotifyArtist: Mappable {
 struct Track: Mappable
 {
     let name: String?
-    init (name: String?) {
+    init (name: String? = nil) {
         self.name = name
     }
     
     func map(json: NSDictionary) -> [Mappable]
     {
-        
-        
-        let jsonName = json["name"] as? String
-        return [Track(name: jsonName)]
+        var tracks = [Mappable]()
+        if let results = json["tracks"] as? NSArray {
+            tracks = createTracks(results as! [NSDictionary])
+        }
+        return tracks
     }
     
-    func createTracks(results: [NSDictionary]) -> [Track]
+    func createTracks(results: [NSDictionary]) -> [Mappable]
     {
-        var tracks = [Track]()
+        var tracks = [Mappable]()
         for result in results {
             let trackResult = result as? NSDictionary
             guard let trackName = trackResult?["name"] as? String else {continue}
             let track = Track(name: trackName)
             tracks.append(track)
         }
-        
         return tracks
     }
 
@@ -82,5 +80,4 @@ struct Track: Mappable
 protocol Mappable
 {
     func map(json: NSDictionary) -> [Mappable]
-    
 }

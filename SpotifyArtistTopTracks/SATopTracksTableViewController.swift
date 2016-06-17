@@ -14,7 +14,7 @@ class SATopTracksTableViewController: UITableViewController {
     @IBOutlet weak var artistNameLabel: UILabel!
     
     var spotifyArtist = SpotifyArtist()
-    var results = [Track]()
+    var results = [Mappable]()
     let trackCellReuseIdentifier = "TrackTableViewCellIdentifier"
     
     override func viewDidLoad()
@@ -44,16 +44,17 @@ class SATopTracksTableViewController: UITableViewController {
         self.tableView.backgroundColor = UIColor.blackColor()
     }
     
-    //MARK: - Network request
+    //MARK: - Networking
     
     private func fetchArtistTopTracks()
     {
-        SARequestManager.sharedService.getArtistTopTracksWithCompletion(self.spotifyArtist) { (response) in
+        let url = SARequestManager.sharedService.tracksURL(spotifyArtist)
+        let track = Track()
+        SARequestManager.sharedService.getDataWithCompletion(url, mappable: track) { (response) in
             switch response {
             case .Failure(error: let error):
                 print("Error fetching top tracks: \(error)")
-            case .Success(topTracks: let returnedTracks):
-                print("Success: \(returnedTracks)")
+            case .Success(mappables: let returnedTracks):
                 self.results = returnedTracks
                 self.tableView.reloadData()
             }
@@ -76,8 +77,8 @@ class SATopTracksTableViewController: UITableViewController {
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(trackCellReuseIdentifier, forIndexPath: indexPath) as? TrackTableViewCell
         
-        let track = results[indexPath.row]
-        cell!.trackNameLabel.text = track.name
+        let track = results[indexPath.row] as? Track
+        cell!.trackNameLabel.text = track!.name
 
         return cell!
     }

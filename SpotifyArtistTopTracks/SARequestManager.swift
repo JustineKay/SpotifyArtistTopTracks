@@ -8,76 +8,36 @@
 
 import Foundation
 
-enum RequestManager: ErrorType {
+enum RequestManager: ErrorType
+{
     case UnexpectedvarResponse
 }
 
-enum TopTracksResponse {
-    case Success(topTracks: [Track])
+enum Response
+{
+    case Success(mappables: [Mappable])
     case Failure(error: ErrorType)
 }
 
-enum ArtistsResponse {
-    case Success(artists: [Mappable])
-    case Failure(error: ErrorType)
-}
-
-class SARequestManager {
-    
+class SARequestManager
+{
     static let sharedService = SARequestManager()
     
     private let session: NSURLSession = {
         let sessionConfig: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        
-        //Headers?
-        
         let session = NSURLSession(configuration: sessionConfig)
         return session
     }()
     
-    func getArtistTopTracksWithCompletion(artist: SpotifyArtist, completion: ((TopTracksResponse) -> Void)) {
-        let artistID = artist.spotifyID
-        let path = "https://api.spotify.com/v1/artists/\(artistID)/top-tracks?country=US"
-        guard let url = NSURL(string: path) else {
-            return
+    func tracksURL(artist: SpotifyArtist) -> NSURL
+    {
+        var path = String()
+        if let spotifyID = artist.spotifyID {
+            path = "https://api.spotify.com/v1/artists/\(spotifyID)/top-tracks?country=US"            
         }
+        let url = NSURL(string: path)!
         
-        let task = session.dataTaskWithURL(url) { (data: NSData?, response: NSURLResponse?, error: NSError?) in
-            var result: TopTracksResponse
-            
-            // We have to handle a few cases here:
-            
-            if let error = error {
-                result = TopTracksResponse.Failure(error: error)
-            } else if let data = data {
-                do {
-                    let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary
-                    
-                    var returnedTracks = [Track]()
-                    
-                    if let results = jsonResult?["tracks"] as? NSArray {
-                        //returnedTracks = self.createTracks(artist, results: results as! [NSDictionary])
-                    }
-                    
-                    result = TopTracksResponse.Success(topTracks: returnedTracks)
-                    
-                } catch let error as NSError {
-                    result = TopTracksResponse.Failure(error: error)
-                }
-            } else {
-                result = TopTracksResponse.Success(topTracks: [Track]())
-            }
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                completion(result)
-            }
-        }
-        task.resume()
-    }
-    
-    func getArtist(artistName: String) -> SpotifyArtist {
-        let artist = SpotifyArtist(name: artistName)
-        return artist
+        return url
     }
     
     func artistsURL(artistName: String) -> NSURL
@@ -88,34 +48,32 @@ class SARequestManager {
         return url
     }
     
-    func getDataWithCompletion(url: NSURL, mappable: Mappable, completion: ((ArtistsResponse) -> Void))
+    func getDataWithCompletion(url: NSURL, mappable: Mappable, completion: ((Response) -> Void))
     {
         let task = session.dataTaskWithURL(url) { (data: NSData?, response: NSURLResponse?, error: NSError?) in
-        var result: ArtistsResponse
+            var result: Response
             
-        if let error = error {
-            result = ArtistsResponse.Failure(error: error)
-        } else if let data = data {
-            do {
-                let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary
-                
-                var returnedArtists = [Mappable]()
-                returnedArtists = mappable.map(jsonResult!)
-                result = ArtistsResponse.Success(artists: returnedArtists)
-                
-            } catch let error as NSError {
-                result = ArtistsResponse.Failure(error: error)
+            if let error = error {
+                result = Response.Failure(error: error)
+            } else if let data = data {
+                do {
+                    let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary
+                    
+                    var returnedMappables = [Mappable]()
+                    returnedMappables = mappable.map(jsonResult!)
+                    result = Response.Success(mappables: returnedMappables)
+                    
+                } catch let error as NSError {
+                    result = Response.Failure(error: error)
+                }
+            } else {
+                result = Response.Success(mappables: [Mappable]())
             }
-        } else {
-            result = ArtistsResponse.Success(artists: [Mappable]())
-        }
             dispatch_async(dispatch_get_main_queue()) {
                 completion(result)
             }
         }
         task.resume()
     }
-    
-    
     
 }

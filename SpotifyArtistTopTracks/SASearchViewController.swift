@@ -37,20 +37,18 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         artistNameTextField.text = nil
     }
     
-    //MARK: - Actions
+    //MARK: - Networking
     
     private func performSearch()
     {
-        let artist = SARequestManager.sharedService.getArtist(artistNameTextField.text!)
+        let artist = SpotifyArtist(name: artistNameTextField.text!)
         let url = SARequestManager.sharedService.artistsURL(artist.name!)
-        
         
         SARequestManager.sharedService.getDataWithCompletion(url, mappable: artist) { (response) in
             switch response {
             case .Failure(error: let error):
                 print("Error fetching artists: \(error)")
-            case .Success(artists: let returnedArtists):
-                //print("Success: \(returnedArtists)")
+            case .Success(mappables: let returnedArtists):
                 self.results = returnedArtists
                 self.searchResultsTableView.reloadData()
             }
@@ -69,15 +67,15 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         return results.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier(artistCellReuseIdentifier, forIndexPath: indexPath)
-        
         let spotifyArtist = results[indexPath.row] as? SpotifyArtist
+        
         cell.textLabel?.text = spotifyArtist!.name
         cell.textLabel?.textColor = UIColor.init(colorLiteralRed: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1)
         cell.textLabel?.font = UIFont.init(name: "Montserrat", size: 17.0)
         cell.backgroundColor = UIColor.blackColor()
-        
         
         return cell
     }
