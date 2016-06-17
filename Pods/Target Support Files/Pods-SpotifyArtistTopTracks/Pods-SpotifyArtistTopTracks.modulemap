@@ -1,0 +1,6 @@
+framework module Pods_SpotifyArtistTopTracks {
+  umbrella header "Pods-SpotifyArtistTopTracks-umbrella.h"
+
+  export *
+  module * { export * }
+}
