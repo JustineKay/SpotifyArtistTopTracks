@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SATopTracksTableViewController: UITableViewController {
 
@@ -21,15 +22,22 @@ class SATopTracksTableViewController: UITableViewController {
     {
         super.viewDidLoad()
         
-        artistNameLabel.text = spotifyArtist.name
-        
         fetchArtistTopTracks()
-        
+        setUpSelectedArtistUI()
         setUpCustomTableViewCell()
         setUpTableView()
     }
     
     //MARK: - UI
+    
+    func setUpSelectedArtistUI()
+    {
+        artistNameLabel.text = spotifyArtist.name
+        if let image = spotifyArtist.profileImage {
+            let spotifyArtistImageURL = NSURL(string: image)
+            artistImageView.sd_setImageWithURL(spotifyArtistImageURL)
+        }
+    }
     
     func setUpCustomTableViewCell()
     {

@@ -28,13 +28,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fK1-Mb-7jg">
-                                    <rect key="frame" x="225" y="50" width="150" height="150"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="150" id="D8C-8e-vkb"/>
-                                        <constraint firstAttribute="width" constant="150" id="QDZ-Jp-XEu"/>
-                                    </constraints>
-                                </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waO-hR-xhC">
                                     <rect key="frame" x="239" y="208" width="123" height="25"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
@@ -50,12 +43,20 @@
                                         <action selector="popVC:" destination="Bgq-Pv-C3B" eventType="touchUpInside" id="54i-uN-QMn"/>
                                     </connections>
                                 </button>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fK1-Mb-7jg">
+                                    <rect key="frame" x="225" y="50" width="150" height="150"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="150" id="D8C-8e-vkb"/>
+                                        <constraint firstAttribute="width" constant="150" id="QDZ-Jp-XEu"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="waO-hR-xhC" firstAttribute="top" secondItem="fK1-Mb-7jg" secondAttribute="bottom" constant="8" symbolic="YES" id="4Pw-Zb-NZ3"/>
                                 <constraint firstItem="waO-hR-xhC" firstAttribute="centerX" secondItem="qDG-eB-SBY" secondAttribute="centerX" id="Dl5-bi-blr"/>
                                 <constraint firstItem="yxz-5r-upS" firstAttribute="leading" secondItem="qDG-eB-SBY" secondAttribute="leading" constant="20" symbolic="YES" id="UuG-Ir-Ify"/>
+                                <constraint firstAttribute="bottom" secondItem="waO-hR-xhC" secondAttribute="bottom" constant="43" id="f7M-SR-KHd"/>
                                 <constraint firstItem="fK1-Mb-7jg" firstAttribute="centerY" secondItem="qDG-eB-SBY" secondAttribute="centerY" id="ilm-qr-6A5"/>
                                 <constraint firstItem="yxz-5r-upS" firstAttribute="top" secondItem="qDG-eB-SBY" secondAttribute="top" constant="20" symbolic="YES" id="rBy-lv-3qH"/>
                                 <constraint firstItem="fK1-Mb-7jg" firstAttribute="top" secondItem="qDG-eB-SBY" secondAttribute="top" constant="50" id="rjR-Cn-115"/>
