@@ -9,7 +9,6 @@
         <mutableArray key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
             <string>Montserrat-Bold</string>
-            <string>Montserrat-Bold</string>
         </mutableArray>
         <mutableArray key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
@@ -35,11 +34,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="276"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxz-5r-upS">
-                                    <rect key="frame" x="20" y="20" width="92" height="31"/>
-                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxz-5r-upS">
+                                    <rect key="frame" x="20" y="20" width="15" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="jfM-Yk-JCG"/>
+                                        <constraint firstAttribute="width" constant="15" id="nAm-HN-3eQ"/>
+                                    </constraints>
                                     <color key="tintColor" red="0.41568627450980389" green="0.8901960784313725" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="New Search"/>
+                                    <state key="normal" image="back_arrow"/>
                                     <connections>
                                         <action selector="popVC:" destination="Bgq-Pv-C3B" eventType="touchUpInside" id="54i-uN-QMn"/>
                                     </connections>
@@ -224,6 +226,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back_arrow" width="174" height="257"/>
         <image name="spotifyLogo" width="782" height="784"/>
     </resources>
 </document>
