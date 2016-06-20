@@ -14,7 +14,7 @@ class TrackTableViewCell: UITableViewCell {
     @IBOutlet weak var albumNameLabel: UILabel!
     @IBOutlet weak var albumCoverImageView: UIImageView!
     
-    @IBAction func playButton(sender: UIButton)
+    @IBAction func playDemo(sender: UIButton)
     {
         
     }
