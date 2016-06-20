@@ -11,4 +11,13 @@ import UIKit
 class TrackTableViewCell: UITableViewCell {
 
     @IBOutlet weak var trackNameLabel: UILabel!
+    @IBOutlet weak var albumNameLabel: UILabel!
+    @IBOutlet weak var albumCoverImageView: UIImageView!
+    
+    @IBAction func playButton(sender: UIButton)
+    {
+        
+    }
+    
+    
 }

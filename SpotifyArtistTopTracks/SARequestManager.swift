@@ -35,17 +35,25 @@ class SARequestManager
         if let spotifyID = artist.spotifyID {
             path = "https://api.spotify.com/v1/artists/\(spotifyID)/top-tracks?country=US"            
         }
-        let url = NSURL(string: path)!
+        var tracksURL = NSURL()
+        if let url = NSURL(string: path) {
+            tracksURL = url
+            return tracksURL
+        }
         
-        return url
+        return tracksURL
     }
     
     func artistsURL(artistName: String) -> NSURL
     {
         let path = "https://api.spotify.com/v1/search?query=\(artistName)&offset=0&limit=20&type=artist&market=US"
-        let url = NSURL(string: path)!
+        var artistsURL = NSURL()
+        if let url = NSURL(string: path) {
+            artistsURL = url
+            return artistsURL
+        }
         
-        return url
+        return artistsURL
     }
     
     func getDataWithCompletion(url: NSURL, mappable: Mappable, completion: ((Response) -> Void))
