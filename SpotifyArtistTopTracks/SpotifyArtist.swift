@@ -55,8 +55,15 @@ struct SpotifyArtist: Mappable {
 struct Track: Mappable
 {
     let name: String?
-    init (name: String? = nil) {
+    let albumCoverImage: String?
+    let albumName: String?
+    let trackPreviewURLString: String?
+    
+    init (name: String? = nil, albumCoverImage: String? = nil, albumName: String? = nil, trackPreviewURLString: String? = nil) {
         self.name = name
+        self.albumCoverImage = albumCoverImage
+        self.albumName = albumName
+        self.trackPreviewURLString = trackPreviewURLString
     }
     
     func map(json: NSDictionary) -> [Mappable]
@@ -74,8 +81,16 @@ struct Track: Mappable
         for result in results {
             let trackResult = result as? NSDictionary
             guard let trackName = trackResult?["name"] as? String else {continue}
-            let track = Track(name: trackName)
+            guard let trackAlbum = trackResult?["album"] as? NSDictionary else {continue}
+            guard let trackAlbumCoverImages = trackAlbum["images"] as? [NSDictionary] else {continue}
+            guard let trackAlbumCoverImage = trackAlbumCoverImages.first else {continue}
+            guard let trackAlbumCoverImageURLString = trackAlbumCoverImage["url"] as? String else {continue}
+            guard let trackAlbumName = trackAlbum["name"] as? String else {continue}
+            guard let trackPreviewURLString = trackResult?["preview_url"] as? String else {continue}
+            
+            let track = Track(name: trackName, albumCoverImage: trackAlbumCoverImageURLString, albumName: trackAlbumName, trackPreviewURLString: trackPreviewURLString)
             tracks.append(track)
+            print("\(tracks)")
         }
         return tracks
     }

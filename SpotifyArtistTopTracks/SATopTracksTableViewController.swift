@@ -97,6 +97,11 @@ class SATopTracksTableViewController: UITableViewController {
         
         let track = results[indexPath.row] as? Track
         cell!.trackNameLabel.text = track!.name
+        cell!.albumNameLabel.text = track!.albumName
+        if let image = track!.albumCoverImage {
+            let albumCoverImageURL = NSURL(string: image)
+            cell!.albumCoverImageView.sd_setImageWithURL(albumCoverImageURL)
+        }
 
         return cell!
     }
