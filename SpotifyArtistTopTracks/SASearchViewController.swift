@@ -10,7 +10,6 @@ import UIKit
 
 class SASearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
 {
-
     @IBOutlet weak var artistNameTextField: UITextField!
     @IBOutlet weak var searchResultsTableView: UITableView!
     
@@ -76,8 +75,24 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
         cell.textLabel?.textColor = UIColor.init(colorLiteralRed: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1)
         cell.textLabel?.font = UIFont.init(name: "Montserrat", size: 17.0)
         cell.backgroundColor = UIColor.blackColor()
+        cell.imageView?.image = UIImage()
+        
+        if let image = spotifyArtist!.profileImage {
+            cell.addSubview(artistProfileImage(image))
+        }
         
         return cell
+    }
+    
+    private func artistProfileImage(imageURLString: String) -> UIImageView
+    {
+        let artistProfileImageURL = NSURL(string: imageURLString)
+        let cellImg : UIImageView = UIImageView(frame: CGRectMake(5, 5, 28, 28))
+        cellImg.layer.cornerRadius = 14.0
+        cellImg.layer.masksToBounds = true
+        cellImg.sd_setImageWithURL(artistProfileImageURL)
+        cellImg.contentMode = UIViewContentMode.ScaleAspectFill
+        return cellImg
     }
     
     //MARK: - Navigation
