@@ -46,11 +46,13 @@ class SARequestManager
     
     func artistsURL(artistName: String) -> NSURL
     {
-        let path = "https://api.spotify.com/v1/search?query=\(artistName)&offset=0&limit=20&type=artist&market=US"
         var artistsURL = NSURL()
-        if let url = NSURL(string: path) {
-            artistsURL = url
-            return artistsURL
+        if let encodedName = artistName.stringByAddingPercentEncodingForRFC3986() {
+            let path = "https://api.spotify.com/v1/search?query=\(encodedName)&offset=0&limit=20&type=artist&market=US"
+            if let url = NSURL(string: path) {
+                artistsURL = url
+                return artistsURL
+            }
         }
         
         return artistsURL
@@ -84,4 +86,13 @@ class SARequestManager
         task.resume()
     }
     
+}
+
+extension String {
+    func stringByAddingPercentEncodingForRFC3986() -> String? {
+        let unreserved = "-._~/?"
+        let allowed = NSMutableCharacterSet.alphanumericCharacterSet()
+        allowed.addCharactersInString(unreserved)
+        return stringByAddingPercentEncodingWithAllowedCharacters(allowed)
+    }
 }
