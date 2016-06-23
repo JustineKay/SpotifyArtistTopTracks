@@ -44,10 +44,10 @@ struct SpotifyArtist: Mappable {
             guard let artistImages = artistResult?["images"] as? [NSDictionary] else {continue}
             guard let artistProfileImage = artistImages.first else {continue}
             guard let artistProfileImageURLString = artistProfileImage["url"] as? String? else {continue}
+            
             let artist = SpotifyArtist(spotifyID: artistSpotifyID, name: artistName, profileImage: artistProfileImageURLString)
             spotifyArtists.append(artist)
         }
-        
         return spotifyArtists
     }
 }
@@ -90,7 +90,6 @@ struct Track: Mappable
             
             let track = Track(name: trackName, albumCoverImage: trackAlbumCoverImageURLString, albumName: trackAlbumName, trackPreviewURLString: trackPreviewURLString)
             tracks.append(track)
-            print("\(tracks)")
         }
         return tracks
     }
