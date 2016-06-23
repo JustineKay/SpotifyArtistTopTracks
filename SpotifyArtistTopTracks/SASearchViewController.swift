@@ -87,7 +87,7 @@ class SASearchViewController: UIViewController, UITableViewDelegate, UITableView
     private func artistProfileImage(imageURLString: String) -> UIImageView
     {
         let artistProfileImageURL = NSURL(string: imageURLString)
-        let cellImg : UIImageView = UIImageView(frame: CGRectMake(5, 5, 28, 28))
+        let cellImg : UIImageView = UIImageView(frame: CGRectMake(1, 7, 28, 28))
         cellImg.layer.cornerRadius = 14.0
         cellImg.layer.masksToBounds = true
         cellImg.sd_setImageWithURL(artistProfileImageURL)
